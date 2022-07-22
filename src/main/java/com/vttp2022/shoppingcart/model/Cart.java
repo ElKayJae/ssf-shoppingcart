@@ -30,7 +30,7 @@ public class Cart {
     // public String cartDb = appArgs.getOptionValues("dataDir").get(0);
     public static File cartDbFolder = new File(cartDb);
     public String username;
-    public String itemToAdd;
+    public String inputItem;
 
 
     // //create directory
@@ -50,14 +50,14 @@ public class Cart {
     // }
   
 
-    public String getItemToAdd() {
-        return itemToAdd;
+    public String getInputItem() {
+        return inputItem;
     }
 
 
 
-    public void setItemToAdd(String itemToAdd) {
-        this.itemToAdd = itemToAdd;
+    public void setInputItem(String inputItem) {
+        this.inputItem = inputItem;
     }
 
 
@@ -148,18 +148,18 @@ public class Cart {
         public void addItem(){
             Boolean itemFound=false;
                 for (int i = 0; i < cartList.size(); i++) {
-                    if (cartList.get(i).contains(itemToAdd)){
+                    if (cartList.get(i).contains(inputItem)){
                         String[]splitItem = cartList.get(i).split(":");
                         Integer quantity = Integer.parseInt(splitItem[0]);
                         quantity++;
-                        String combinedItem = quantity + ":" + itemToAdd;
+                        String combinedItem = quantity + ":" + inputItem;
                         cartList.set(i, combinedItem);
                         itemFound=true;
                     } 
                 }
                 if (!itemFound){
-                    System.out.println(itemToAdd+ "added");
-                    cartList.add("1:"+itemToAdd);}
+                    System.out.println(inputItem+ "added");
+                    cartList.add("1:"+inputItem);}
             }
                 
         public void delItem(String itemDel){
@@ -193,7 +193,7 @@ public class Cart {
         //check if item is already in the list    
         for (int j = 0; j < cartList.size(); j++) {
             //if item is already in the list,
-            if (cartList.get(j).contains(itemToAdd)){
+            if (cartList.get(j).contains(inputItem)){
                 //find quantity of original itemToBeChanged
                 String[]splitItemToAdd = cartList.get(j).split(":");
                 quantity = Integer.parseInt(splitItemToAdd[0]) ;
@@ -209,7 +209,7 @@ public class Cart {
             if (cartList.get(i).contains(itemToBeChanged)){
                 String[]splitItem = cartList.get(i).split(":");
                 quantity += Integer.parseInt(splitItem[0]);}
-                itemString = quantity + ":" + itemToAdd;
+                itemString = quantity + ":" + inputItem;
                 originalIndex = i;
                 }
 

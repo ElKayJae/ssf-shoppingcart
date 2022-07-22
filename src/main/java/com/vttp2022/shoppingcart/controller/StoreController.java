@@ -1,8 +1,6 @@
 package com.vttp2022.shoppingcart.controller;
 
 
-import java.util.ArrayList;
-import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,7 +49,7 @@ public class StoreController {
         logger.info("current user is " + cartObj.getUsername());
         cartObj.loadCart();
         logger.info(cartObj.getCartList().toString());
-        logger.info("item to add "+ cartObj.getItemToAdd());
+        logger.info("item to add "+ cartObj.getInputItem());
         cartObj.addItem();
         logger.info(cartObj.getCartList().toString());
         cartObj.saveCart();
@@ -100,7 +98,7 @@ public class StoreController {
         cartObj.loadCart();
         String[]splitItem = item.split(":");
         tempItem = splitItem[1];
-        cartObj.setItemToAdd(tempItem);
+        cartObj.setInputItem(tempItem);
         model.addAttribute("cartObj",cartObj);
 
         return"storefrontMirror";
@@ -113,7 +111,7 @@ public class StoreController {
         logger.info("current user is " + cartObj.getUsername());
         cartObj.loadCart();
         logger.info(cartObj.getCartList().toString());
-        logger.info("item to add "+ cartObj.getItemToAdd());
+        logger.info("item to add "+ cartObj.getInputItem());
         cartObj.change(tempItem);
         logger.info(cartObj.getCartList().toString());
         cartObj.saveCart();
