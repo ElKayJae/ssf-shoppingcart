@@ -1,3 +1,3 @@
-2:apple
-5:pear
-5:durian
+1:durian
+5:apple
+4:pear

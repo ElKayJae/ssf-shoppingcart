@@ -22,6 +22,7 @@ public class StoreController {
   
     Cart cartObj;
     String currentUser;
+    String tempItem;
 
 
 
@@ -73,5 +74,51 @@ public class StoreController {
 
         return"storefront";
     }
+
+    @RequestMapping(path="shift/{item}")
+    public String shift(
+        @PathVariable(name="item", required=true) String item,
+        @ModelAttribute Cart cartObj, Model model
+    ){
+        cartObj.setUsername(currentUser);
+        logger.info("current user is " + cartObj.getUsername());
+        cartObj.loadCart();
+        cartObj.shiftItem(item);
+        cartObj.saveCart();
+        model.addAttribute("cartObj",cartObj);
+
+        return"storefront";
+    }
+
+    @RequestMapping(path="edit/{item}")
+    public String edit(
+        @PathVariable(name="item", required=true) String item,
+        @ModelAttribute Cart cartObj, Model model
+    ){
+        cartObj.setUsername(currentUser);
+        logger.info("current user is " + cartObj.getUsername());
+        cartObj.loadCart();
+        String[]splitItem = item.split(":");
+        tempItem = splitItem[1];
+        cartObj.setItemToAdd(tempItem);
+        model.addAttribute("cartObj",cartObj);
+
+        return"storefrontMirror";
+    }
     
+    @RequestMapping(path="change")
+    public String edit(@ModelAttribute Cart cartObj, Model model){
+        logger.info("current user is " + cartObj.getUsername());
+        cartObj.setUsername(currentUser);
+        logger.info("current user is " + cartObj.getUsername());
+        cartObj.loadCart();
+        logger.info(cartObj.getCartList().toString());
+        logger.info("item to add "+ cartObj.getItemToAdd());
+        cartObj.change(tempItem);
+        logger.info(cartObj.getCartList().toString());
+        cartObj.saveCart();
+        model.addAttribute("cartObj",cartObj);
+
+        return "storefront";
+    }
 }

@@ -170,6 +170,57 @@ public class Cart {
                 cartList.remove(i);
             }
         }
+
+        public void shiftItem (String item){
+            for (int i = 0; i < cartList.size(); i++) {
+                if(cartList.get(i).equals(item)){
+                    cartList.remove(i);
+                    cartList.add(i-1, item);
+                    break;
+                }
+
+
+        }
+    }
+
+    public void change(String itemToBeChanged){
+        Integer quantity=0;
+        Boolean itemFound=false;
+        int itemIndex=0;
+        String itemString="";
+        int originalIndex=0;
+
+        //check if item is already in the list    
+        for (int j = 0; j < cartList.size(); j++) {
+            //if item is already in the list,
+            if (cartList.get(j).contains(itemToAdd)){
+                //find quantity of original itemToBeChanged
+                String[]splitItemToAdd = cartList.get(j).split(":");
+                quantity = Integer.parseInt(splitItemToAdd[0]) ;
+                itemFound = true;
+                itemIndex =j;
+            }
+        }
+        System.out.println(quantity);
+        System.out.println(itemIndex);
+
+        //find the item to be changed
+        for (int i = 0; i < cartList.size(); i++) {
+            if (cartList.get(i).contains(itemToBeChanged)){
+                String[]splitItem = cartList.get(i).split(":");
+                quantity += Integer.parseInt(splitItem[0]);}
+                itemString = quantity + ":" + itemToAdd;
+                originalIndex = i;
+                }
+
+        if (!itemFound){
+            cartList.set(originalIndex, itemString);
+            
+        } else {
+            cartList.set(itemIndex, itemString);
+            cartList.remove(originalIndex);
+        }
+    }
            
 }
     
