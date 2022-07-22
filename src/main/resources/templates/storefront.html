@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body  th:object="${cartObj}">
+    <h1>My e-Commerce Store</h1>
+
+    <form
+    action="#"
+    th:action="@{/login}"
+    method="post">
+
+    <input type="text" th:field="*{username}"/>
+    <input type="submit" value="Enter"/>
+
+    </form>
+
+    <br>
+
+    <form
+    action="#"
+    th:action="@{/add}"
+    method="post">
+    <input type="text" th:field="*{itemToAdd}"/>
+    <input type="submit" value="Add"/>
+    </form>
+
+<p><span th:text="*{username}"></span> is logged in</p>
+<div>
+<ul th:each = " item : *{cartList}">
+    <li th:text = "${item}"></li>  
+    <a th:href="@{'/del/'+${item}}">
+        <button type="button">delete</button> 
+    </a>
+    <a th:href="@{'/edit/'+${item}}">
+        <button type="button">edit</button> 
+    </a>
+</ul>
+</div>
+
+</body>
+</html>
